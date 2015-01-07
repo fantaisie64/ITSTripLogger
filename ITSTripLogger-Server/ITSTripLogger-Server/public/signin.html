@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+	<head>
+		<style style="text/css">
+		#container {
+			min-width: 300px;
+			min-height: 300px; 
+			width: 300px;
+			height: 300px;
+			margin: auto;
+			background: red;
+		}
+
+		#title {
+			margin: auto;
+			width: auto;
+			text-align:center;
+			font-size:30px;
+		}
+
+		input.textField {
+			margin: auto;
+			min-width: 240px;
+			width: 240px;
+		}
+
+		</style>
+		<title>ITS Trip Viewer</title>
+		<script type="text/javascript" src="/public/js/jquery.min.js"></script>
+		<script type="text/javascript">
+		$(document).ready(function () {
+			$('#buttonSignin').click(function () {
+				console.log("Signing In...");
+					var signInPayload = {
+	                    username: $('#inputUsername').val(),
+	                    password: $('#inputPassword').val()
+	                };
+
+	            	$.ajax({
+	                    url: "/web_signin",
+	                    type: "POST",
+	                    contentType: "application/json",
+	                    processData: false,
+	                    data: JSON.stringify(signInPayload),
+	                    complete: function (data) {
+	                        //location.reload();
+	                    }
+	                });
+	            });
+		});
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<p>
+				<h1 id="title">ITS Trip Viewer</h1>
+			</p>
+			<p>
+				<h2 id="signin">Sign In</h2>
+			</p>
+			<p>
+				<h3>Username or Email</h3>
+			</p>
+			<p>
+				<input id="inputUsername" class="textField" type="text" />
+			</p>
+			<p>
+				<h3>Password</h3>
+			</p>
+			<p>
+				<input id="inputPassword" class="textField" type="submit"/>
+			</p>
+			<p>
+				<button id="buttonSignin">Sign In</button>
+			</p>
+			<a href="/logout/" id="logout">Log Out</a>
+		</div>
+	</body>
+</html>

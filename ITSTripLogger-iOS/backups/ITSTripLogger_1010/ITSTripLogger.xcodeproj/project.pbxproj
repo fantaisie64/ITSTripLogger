@@ -1,0 +1,573 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		721D2DE2196E2626007BDAC6 /* ITSConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 721D2DE1196E2626007BDAC6 /* ITSConnectionManager.m */; };
+		72A5D9EA199579EC005CA53A /* car.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72A5D9E9199579EC005CA53A /* car.plist */; };
+		72A5D9EC199598C3005CA53A /* Main_iPhone4.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72A5D9EB199598C3005CA53A /* Main_iPhone4.storyboard */; };
+		72A5D9F21999FC94005CA53A /* ITSRecordData.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5D9F11999FC94005CA53A /* ITSRecordData.m */; };
+		72A5D9F51999FCA3005CA53A /* ITSSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5D9F41999FCA3005CA53A /* ITSSignInViewController.m */; };
+		72A73230197600B100736440 /* user.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72A7322F197600B100736440 /* user.plist */; };
+		72A7323319770A5800736440 /* ITSInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A7323219770A5800736440 /* ITSInfoViewController.m */; };
+		72A732361977175000736440 /* ITSRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A732351977175000736440 /* ITSRecordViewController.m */; };
+		72A7323B1977A26900736440 /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = 72A7323A1977A26900736440 /* car.png */; };
+		72A7323D1977AA7A00736440 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72A7323C1977AA7A00736440 /* MapKit.framework */; };
+		72A7323F19788A8200736440 /* parameter.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72A7323E19788A8200736440 /* parameter.plist */; };
+		72AD068419807F7B00859E9A /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AD068319807F7B00859E9A /* MapViewAnnotation.m */; };
+		72AD06951980A5D000859E9A /* route1.png in Resources */ = {isa = PBXBuildFile; fileRef = 72AD06931980A5D000859E9A /* route1.png */; };
+		72AD06961980A5D000859E9A /* route2.png in Resources */ = {isa = PBXBuildFile; fileRef = 72AD06941980A5D000859E9A /* route2.png */; };
+		72AD0698198AF67300859E9A /* record.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72AD0697198AF67300859E9A /* record.plist */; };
+		72AD069A198AF86200859E9A /* type.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72AD0699198AF86200859E9A /* type.plist */; };
+		72FD7212193EA937008E524B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7211193EA937008E524B /* Foundation.framework */; };
+		72FD7214193EA937008E524B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7213193EA937008E524B /* CoreGraphics.framework */; };
+		72FD7216193EA937008E524B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7215193EA937008E524B /* UIKit.framework */; };
+		72FD721C193EA937008E524B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72FD721A193EA937008E524B /* InfoPlist.strings */; };
+		72FD721E193EA937008E524B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FD721D193EA937008E524B /* main.m */; };
+		72FD7222193EA937008E524B /* ITSAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FD7221193EA937008E524B /* ITSAppDelegate.m */; };
+		72FD7225193EA937008E524B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72FD7223193EA937008E524B /* Main.storyboard */; };
+		72FD722D193EA937008E524B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72FD722C193EA937008E524B /* Images.xcassets */; };
+		72FD7234193EA937008E524B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7233193EA937008E524B /* XCTest.framework */; };
+		72FD7235193EA937008E524B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7211193EA937008E524B /* Foundation.framework */; };
+		72FD7236193EA937008E524B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7215193EA937008E524B /* UIKit.framework */; };
+		72FD723E193EA937008E524B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 72FD723C193EA937008E524B /* InfoPlist.strings */; };
+		72FD7240193EA937008E524B /* ITSTripLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FD723F193EA937008E524B /* ITSTripLoggerTests.m */; };
+		72FD7250193EF21A008E524B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD724F193EF21A008E524B /* CoreLocation.framework */; };
+		72FD7252193EF22C008E524B /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72FD7251193EF22C008E524B /* CoreBluetooth.framework */; };
+		72FD7255193EF740008E524B /* ITSBeaconViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FD7254193EF740008E524B /* ITSBeaconViewController.m */; };
+		72FD7258193F0B1A008E524B /* ITSBeaconManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 72FD7257193F0B1A008E524B /* ITSBeaconManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		72FD7237193EA937008E524B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72FD7206193EA937008E524B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 72FD720D193EA937008E524B;
+			remoteInfo = ITSTripLogger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		721D2DE0196E2626007BDAC6 /* ITSConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSConnectionManager.h; sourceTree = "<group>"; };
+		721D2DE1196E2626007BDAC6 /* ITSConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSConnectionManager.m; sourceTree = "<group>"; };
+		72A5D9E9199579EC005CA53A /* car.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = car.plist; sourceTree = "<group>"; };
+		72A5D9EB199598C3005CA53A /* Main_iPhone4.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPhone4.storyboard; sourceTree = "<group>"; };
+		72A5D9F01999FC94005CA53A /* ITSRecordData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSRecordData.h; sourceTree = "<group>"; };
+		72A5D9F11999FC94005CA53A /* ITSRecordData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSRecordData.m; sourceTree = "<group>"; };
+		72A5D9F31999FCA3005CA53A /* ITSSignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSSignInViewController.h; sourceTree = "<group>"; };
+		72A5D9F41999FCA3005CA53A /* ITSSignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSSignInViewController.m; sourceTree = "<group>"; };
+		72A7322F197600B100736440 /* user.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = user.plist; sourceTree = "<group>"; };
+		72A7323119770A5800736440 /* ITSInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSInfoViewController.h; sourceTree = "<group>"; };
+		72A7323219770A5800736440 /* ITSInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSInfoViewController.m; sourceTree = "<group>"; };
+		72A732341977175000736440 /* ITSRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSRecordViewController.h; sourceTree = "<group>"; };
+		72A732351977175000736440 /* ITSRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSRecordViewController.m; sourceTree = "<group>"; };
+		72A7323A1977A26900736440 /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		72A7323C1977AA7A00736440 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		72A7323E19788A8200736440 /* parameter.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = parameter.plist; sourceTree = "<group>"; };
+		72AD068219807F7B00859E9A /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
+		72AD068319807F7B00859E9A /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		72AD06931980A5D000859E9A /* route1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route1.png; sourceTree = "<group>"; };
+		72AD06941980A5D000859E9A /* route2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = route2.png; sourceTree = "<group>"; };
+		72AD0697198AF67300859E9A /* record.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = record.plist; sourceTree = "<group>"; };
+		72AD0699198AF86200859E9A /* type.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = type.plist; sourceTree = "<group>"; };
+		72FD720E193EA937008E524B /* ITSTripLogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITSTripLogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		72FD7211193EA937008E524B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		72FD7213193EA937008E524B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		72FD7215193EA937008E524B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		72FD7219193EA937008E524B /* ITSTripLogger-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ITSTripLogger-Info.plist"; sourceTree = "<group>"; };
+		72FD721B193EA937008E524B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		72FD721D193EA937008E524B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72FD721F193EA937008E524B /* ITSTripLogger-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ITSTripLogger-Prefix.pch"; sourceTree = "<group>"; };
+		72FD7220193EA937008E524B /* ITSAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITSAppDelegate.h; sourceTree = "<group>"; };
+		72FD7221193EA937008E524B /* ITSAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITSAppDelegate.m; sourceTree = "<group>"; };
+		72FD7224193EA937008E524B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		72FD722C193EA937008E524B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		72FD7232193EA937008E524B /* ITSTripLoggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ITSTripLoggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		72FD7233193EA937008E524B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		72FD723B193EA937008E524B /* ITSTripLoggerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ITSTripLoggerTests-Info.plist"; sourceTree = "<group>"; };
+		72FD723D193EA937008E524B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		72FD723F193EA937008E524B /* ITSTripLoggerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITSTripLoggerTests.m; sourceTree = "<group>"; };
+		72FD724F193EF21A008E524B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		72FD7251193EF22C008E524B /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		72FD7253193EF740008E524B /* ITSBeaconViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSBeaconViewController.h; sourceTree = "<group>"; };
+		72FD7254193EF740008E524B /* ITSBeaconViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSBeaconViewController.m; sourceTree = "<group>"; };
+		72FD7256193F0B1A008E524B /* ITSBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSBeaconManager.h; sourceTree = "<group>"; };
+		72FD7257193F0B1A008E524B /* ITSBeaconManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSBeaconManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		72FD720B193EA937008E524B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72A7323D1977AA7A00736440 /* MapKit.framework in Frameworks */,
+				72FD7252193EF22C008E524B /* CoreBluetooth.framework in Frameworks */,
+				72FD7250193EF21A008E524B /* CoreLocation.framework in Frameworks */,
+				72FD7214193EA937008E524B /* CoreGraphics.framework in Frameworks */,
+				72FD7216193EA937008E524B /* UIKit.framework in Frameworks */,
+				72FD7212193EA937008E524B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72FD722F193EA937008E524B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72FD7234193EA937008E524B /* XCTest.framework in Frameworks */,
+				72FD7236193EA937008E524B /* UIKit.framework in Frameworks */,
+				72FD7235193EA937008E524B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		72FD7205193EA937008E524B = {
+			isa = PBXGroup;
+			children = (
+				72FD7217193EA937008E524B /* ITSTripLogger */,
+				72FD7239193EA937008E524B /* ITSTripLoggerTests */,
+				72FD7210193EA937008E524B /* Frameworks */,
+				72FD720F193EA937008E524B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		72FD720F193EA937008E524B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				72FD720E193EA937008E524B /* ITSTripLogger.app */,
+				72FD7232193EA937008E524B /* ITSTripLoggerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		72FD7210193EA937008E524B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				72A7323C1977AA7A00736440 /* MapKit.framework */,
+				72FD7251193EF22C008E524B /* CoreBluetooth.framework */,
+				72FD724F193EF21A008E524B /* CoreLocation.framework */,
+				72FD7211193EA937008E524B /* Foundation.framework */,
+				72FD7213193EA937008E524B /* CoreGraphics.framework */,
+				72FD7215193EA937008E524B /* UIKit.framework */,
+				72FD7233193EA937008E524B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		72FD7217193EA937008E524B /* ITSTripLogger */ = {
+			isa = PBXGroup;
+			children = (
+				72A5D9F01999FC94005CA53A /* ITSRecordData.h */,
+				72A5D9F11999FC94005CA53A /* ITSRecordData.m */,
+				721D2DE0196E2626007BDAC6 /* ITSConnectionManager.h */,
+				721D2DE1196E2626007BDAC6 /* ITSConnectionManager.m */,
+				72FD7256193F0B1A008E524B /* ITSBeaconManager.h */,
+				72FD7257193F0B1A008E524B /* ITSBeaconManager.m */,
+				72A5D9F31999FCA3005CA53A /* ITSSignInViewController.h */,
+				72A5D9F41999FCA3005CA53A /* ITSSignInViewController.m */,
+				72A732341977175000736440 /* ITSRecordViewController.h */,
+				72A732351977175000736440 /* ITSRecordViewController.m */,
+				72AD068219807F7B00859E9A /* MapViewAnnotation.h */,
+				72AD068319807F7B00859E9A /* MapViewAnnotation.m */,
+				72A7323119770A5800736440 /* ITSInfoViewController.h */,
+				72A7323219770A5800736440 /* ITSInfoViewController.m */,
+				72FD7253193EF740008E524B /* ITSBeaconViewController.h */,
+				72FD7254193EF740008E524B /* ITSBeaconViewController.m */,
+				72FD7220193EA937008E524B /* ITSAppDelegate.h */,
+				72FD7221193EA937008E524B /* ITSAppDelegate.m */,
+				72FD7223193EA937008E524B /* Main.storyboard */,
+				72A5D9EB199598C3005CA53A /* Main_iPhone4.storyboard */,
+				72FD722C193EA937008E524B /* Images.xcassets */,
+				72FD7218193EA937008E524B /* Supporting Files */,
+			);
+			path = ITSTripLogger;
+			sourceTree = "<group>";
+		};
+		72FD7218193EA937008E524B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				72A7323A1977A26900736440 /* car.png */,
+				72AD06931980A5D000859E9A /* route1.png */,
+				72AD06941980A5D000859E9A /* route2.png */,
+				72FD7219193EA937008E524B /* ITSTripLogger-Info.plist */,
+				72FD721A193EA937008E524B /* InfoPlist.strings */,
+				72FD721D193EA937008E524B /* main.m */,
+				72FD721F193EA937008E524B /* ITSTripLogger-Prefix.pch */,
+				72A7322F197600B100736440 /* user.plist */,
+				72A7323E19788A8200736440 /* parameter.plist */,
+				72AD0697198AF67300859E9A /* record.plist */,
+				72AD0699198AF86200859E9A /* type.plist */,
+				72A5D9E9199579EC005CA53A /* car.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		72FD7239193EA937008E524B /* ITSTripLoggerTests */ = {
+			isa = PBXGroup;
+			children = (
+				72FD723F193EA937008E524B /* ITSTripLoggerTests.m */,
+				72FD723A193EA937008E524B /* Supporting Files */,
+			);
+			path = ITSTripLoggerTests;
+			sourceTree = "<group>";
+		};
+		72FD723A193EA937008E524B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				72FD723B193EA937008E524B /* ITSTripLoggerTests-Info.plist */,
+				72FD723C193EA937008E524B /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		72FD720D193EA937008E524B /* ITSTripLogger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72FD7243193EA937008E524B /* Build configuration list for PBXNativeTarget "ITSTripLogger" */;
+			buildPhases = (
+				72FD720A193EA937008E524B /* Sources */,
+				72FD720B193EA937008E524B /* Frameworks */,
+				72FD720C193EA937008E524B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ITSTripLogger;
+			productName = ITSTripLogger;
+			productReference = 72FD720E193EA937008E524B /* ITSTripLogger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		72FD7231193EA937008E524B /* ITSTripLoggerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 72FD7246193EA937008E524B /* Build configuration list for PBXNativeTarget "ITSTripLoggerTests" */;
+			buildPhases = (
+				72FD722E193EA937008E524B /* Sources */,
+				72FD722F193EA937008E524B /* Frameworks */,
+				72FD7230193EA937008E524B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				72FD7238193EA937008E524B /* PBXTargetDependency */,
+			);
+			name = ITSTripLoggerTests;
+			productName = ITSTripLoggerTests;
+			productReference = 72FD7232193EA937008E524B /* ITSTripLoggerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		72FD7206193EA937008E524B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = ITS;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = ITS;
+				TargetAttributes = {
+					72FD720D193EA937008E524B = {
+						DevelopmentTeam = 2336YW99BN;
+					};
+					72FD7231193EA937008E524B = {
+						TestTargetID = 72FD720D193EA937008E524B;
+					};
+				};
+			};
+			buildConfigurationList = 72FD7209193EA937008E524B /* Build configuration list for PBXProject "ITSTripLogger" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 72FD7205193EA937008E524B;
+			productRefGroup = 72FD720F193EA937008E524B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				72FD720D193EA937008E524B /* ITSTripLogger */,
+				72FD7231193EA937008E524B /* ITSTripLoggerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		72FD720C193EA937008E524B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72FD722D193EA937008E524B /* Images.xcassets in Resources */,
+				72FD721C193EA937008E524B /* InfoPlist.strings in Resources */,
+				72A7323B1977A26900736440 /* car.png in Resources */,
+				72FD7225193EA937008E524B /* Main.storyboard in Resources */,
+				72A7323F19788A8200736440 /* parameter.plist in Resources */,
+				72AD0698198AF67300859E9A /* record.plist in Resources */,
+				72AD069A198AF86200859E9A /* type.plist in Resources */,
+				72A73230197600B100736440 /* user.plist in Resources */,
+				72AD06961980A5D000859E9A /* route2.png in Resources */,
+				72A5D9EC199598C3005CA53A /* Main_iPhone4.storyboard in Resources */,
+				72A5D9EA199579EC005CA53A /* car.plist in Resources */,
+				72AD06951980A5D000859E9A /* route1.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72FD7230193EA937008E524B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72FD723E193EA937008E524B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		72FD720A193EA937008E524B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72FD7258193F0B1A008E524B /* ITSBeaconManager.m in Sources */,
+				72FD721E193EA937008E524B /* main.m in Sources */,
+				72A7323319770A5800736440 /* ITSInfoViewController.m in Sources */,
+				72FD7255193EF740008E524B /* ITSBeaconViewController.m in Sources */,
+				72AD068419807F7B00859E9A /* MapViewAnnotation.m in Sources */,
+				72A5D9F21999FC94005CA53A /* ITSRecordData.m in Sources */,
+				72A732361977175000736440 /* ITSRecordViewController.m in Sources */,
+				721D2DE2196E2626007BDAC6 /* ITSConnectionManager.m in Sources */,
+				72FD7222193EA937008E524B /* ITSAppDelegate.m in Sources */,
+				72A5D9F51999FCA3005CA53A /* ITSSignInViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		72FD722E193EA937008E524B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72FD7240193EA937008E524B /* ITSTripLoggerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		72FD7238193EA937008E524B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 72FD720D193EA937008E524B /* ITSTripLogger */;
+			targetProxy = 72FD7237193EA937008E524B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		72FD721A193EA937008E524B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72FD721B193EA937008E524B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		72FD7223193EA937008E524B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72FD7224193EA937008E524B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		72FD723C193EA937008E524B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				72FD723D193EA937008E524B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		72FD7241193EA937008E524B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		72FD7242193EA937008E524B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		72FD7244193EA937008E524B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ITSTripLogger/ITSTripLogger-Prefix.pch";
+				INFOPLIST_FILE = "ITSTripLogger/ITSTripLogger-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		72FD7245193EA937008E524B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ITSTripLogger/ITSTripLogger-Prefix.pch";
+				INFOPLIST_FILE = "ITSTripLogger/ITSTripLogger-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		72FD7247193EA937008E524B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ITSTripLogger.app/ITSTripLogger";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ITSTripLogger/ITSTripLogger-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "ITSTripLoggerTests/ITSTripLoggerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		72FD7248193EA937008E524B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ITSTripLogger.app/ITSTripLogger";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ITSTripLogger/ITSTripLogger-Prefix.pch";
+				INFOPLIST_FILE = "ITSTripLoggerTests/ITSTripLoggerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		72FD7209193EA937008E524B /* Build configuration list for PBXProject "ITSTripLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72FD7241193EA937008E524B /* Debug */,
+				72FD7242193EA937008E524B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72FD7243193EA937008E524B /* Build configuration list for PBXNativeTarget "ITSTripLogger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72FD7244193EA937008E524B /* Debug */,
+				72FD7245193EA937008E524B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		72FD7246193EA937008E524B /* Build configuration list for PBXNativeTarget "ITSTripLoggerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				72FD7247193EA937008E524B /* Debug */,
+				72FD7248193EA937008E524B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 72FD7206193EA937008E524B /* Project object */;
+}

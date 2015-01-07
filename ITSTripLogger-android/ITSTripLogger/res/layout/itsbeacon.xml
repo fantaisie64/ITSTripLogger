@@ -1,0 +1,394 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ucdavis.its.ITSTripLogger.ITSTabBarActivity" >
+    <TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_margin="10dp"
+	    android:layout_centerHorizontal="true"
+	    android:textColor="#0000ff"
+	    android:textSize="20dp"
+	    android:textStyle="bold"
+	    android:text="Cars" />
+    <Button
+        android:id="@+id/editButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="40dp"
+	    android:layout_alignParentRight="true"
+	    android:background="@drawable/edit_button"
+	    android:layout_margin="2dp"
+	    android:textColor="#ffffff"
+	    android:textSize="17dp"
+	    android:textStyle="bold"
+	    android:text="Edit" />
+    <LinearLayout
+		android:id="@+id/Linearlayout"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_marginTop="48dp"
+		android:orientation="vertical"
+		android:weightSum="100" >
+	    <ListView
+		    android:id="@android:id/list"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_weight="65" />
+		<RelativeLayout
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:background="#f2f2f2"
+		    android:layout_weight="35" >
+		    
+	    	<LinearLayout
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"
+			    android:layout_centerInParent="true"
+			    android:layout_margin="10dp"
+			    android:background="#e2e2e2" >
+			    <TextView
+			    	android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_alignParentLeft="true"
+			    	android:layout_margin="6dp"
+			    	android:textSize="17dp"
+	    			android:textStyle="bold"
+			    	android:text="Default Threshold:" />
+			    <TextView
+			        android:id="@+id/thresholdTextView"
+			    	android:layout_width="fill_parent"
+			    	android:layout_height="wrap_content"
+			    	android:gravity="center_horizontal"
+			    	android:layout_marginTop="4dp"
+			    	android:textSize="15dp"
+	    			android:textColor="#ff0000"
+			    	android:text="Threshold: -76" />
+			    <RelativeLayout
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="40" >
+				    <TextView
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:layout_marginLeft="10dp"
+				    	android:textSize="14dp"
+				    	android:text="far" />
+				    <SeekBar
+				        android:id="@+id/thresholdSeekBar"
+				        android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:minHeight="30dp"
+				    	android:layout_centerInParent="true"
+				    	android:layout_marginTop="4dp"
+				    	android:max="40"
+				    	android:progress="20" />
+				    <TextView
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentRight="true"
+				    	android:layout_marginRight="10dp"
+				    	android:textSize="14dp"
+				    	android:text="near" />
+			    </RelativeLayout>
+			    <TextView
+			        android:id="@+id/toleranceTextView"
+			    	android:layout_width="fill_parent"
+			    	android:layout_height="wrap_content"
+			    	android:gravity="center_horizontal"
+			    	android:layout_marginTop="4dp"
+			    	android:textSize="15dp"
+	    			android:textColor="#ff0000"
+			    	android:text="Tolerance: 8" />
+			    <RelativeLayout
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="40" >
+				    <TextView
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:layout_marginLeft="10dp"
+				    	android:textSize="14dp"
+				    	android:text="low" />
+				    <SeekBar
+				        android:id="@+id/toleranceSeekBar"
+				        android:layout_width="fill_parent"
+				    	android:layout_height="wrap_content"
+				    	android:minHeight="30dp"
+				    	android:layout_centerInParent="true"
+				    	android:layout_marginTop="4dp"
+				    	android:max="20"
+				    	android:progress="10" />
+				    <TextView
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentRight="true"
+				    	android:layout_marginRight="10dp"
+				    	android:textSize="14dp"
+				    	android:text="high" />
+			    </RelativeLayout>
+			</LinearLayout>
+			
+	    	<LinearLayout
+	    	    android:id="@+id/changeNameView"
+	    	    android:visibility="invisible"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="vertical"
+			    android:layout_centerInParent="true"
+			    android:layout_margin="10dp"
+			    android:background="#e2e2e2" >
+			    
+	    	    <RelativeLayout
+				    android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:layout_marginLeft="10dp"
+				    android:layout_marginRight="10dp" >
+				    <TextView
+				        android:id="@+id/changeNameTextView"
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:textSize="17dp"
+				    	android:textStyle="bold"
+				    	android:textColor="#0000ff"
+				    	android:text="Not Selected" />
+				    <Button
+				        android:id="@+id/changeNameButton"
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="30dp"
+				    	android:layout_alignParentRight="true"
+				    	android:background="@drawable/update_button"
+				    	android:textColor="#ffffff"
+				    	android:textSize="15dp"
+				    	android:text="Update" />
+			    </RelativeLayout>
+			    <LinearLayout
+			        android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal"
+				    android:layout_marginLeft="10dp"
+				    android:layout_marginRight="10dp" >
+				    <TextView
+				    	android:layout_width="wrap_content"
+				    	android:layout_height="wrap_content"
+				    	android:layout_alignParentLeft="true"
+				    	android:textSize="16dp"
+				    	android:textColor="#0000ff"
+				    	android:textStyle="bold"
+				    	android:text="Name:" />
+				    <EditText
+				        android:id="@+id/changeNameEditText"
+				        android:layout_width="fill_parent"
+				        android:minHeight="30dp"
+				    	android:layout_height="wrap_content"
+				    	android:background="@drawable/rect_edittext"
+				    	android:layout_marginLeft="4dp"
+				    	android:layout_gravity="center"
+				    	android:textSize="14dp"
+				    	android:lines="1"
+				    	android:maxLines="1"/>
+			    </LinearLayout>
+			    <TextView
+			    	android:layout_width="wrap_content"
+			    	android:layout_height="wrap_content"
+			    	android:layout_alignParentLeft="true"
+			    	android:layout_marginTop="4dp"
+			    	android:layout_marginLeft="10dp"
+			    	android:textSize="16dp"
+			    	android:textColor="#0000ff"
+			    	android:textStyle="bold"
+			    	android:text="Threshold:" />
+			    <LinearLayout
+			        android:layout_width="fill_parent"
+				    android:layout_height="wrap_content"
+				    android:orientation="horizontal"
+				    android:layout_marginLeft="10dp"
+				    android:layout_marginRight="10dp"
+				    android:weightSum="100" >
+				    <Button
+				        android:id="@+id/changeAutoButton"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="30dp"
+				    	android:layout_weight="50"
+				    	android:layout_alignParentLeft="true"
+				    	android:background="#ffffff"
+				    	android:textColor="#000000"
+				    	android:textSize="15dp"
+				    	android:text="Auto Calibration" />
+				    <Button
+				        android:id="@+id/changeManualButton"
+				    	android:layout_width="fill_parent"
+				    	android:layout_height="30dp"
+				    	android:layout_weight="50"
+				    	android:layout_alignParentRight="true"
+				    	android:background="#00ffff"
+				    	android:textColor="#000000"
+				    	android:textSize="15dp"
+				    	android:text="Manual" />
+				</LinearLayout>
+				<RelativeLayout
+				    android:layout_width="fill_parent"
+				    android:layout_height="fill_parent"
+				    android:background="#ffffff"
+				    android:layout_marginLeft="10dp"
+				    android:layout_marginRight="10dp"
+				    android:layout_marginBottom="10dp" >
+				    
+				    <LinearLayout
+				        android:id="@+id/changeManualView"
+				        android:visibility="invisible"
+					    android:layout_width="fill_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="vertical"
+					    android:layout_centerInParent="true"
+					    android:layout_margin="10dp"
+					    android:background="#ffffff" >
+					    <TextView
+					        android:id="@+id/beaconThresholdTextView"
+					    	android:layout_width="fill_parent"
+					    	android:layout_height="wrap_content"
+					    	android:gravity="center_horizontal"
+					    	android:textSize="15dp"
+			    			android:textColor="#ff0000"
+					    	android:text="Threshold: -76" />
+					    <RelativeLayout
+						    android:layout_width="fill_parent"
+						    android:layout_height="wrap_content" >
+						    <TextView
+						    	android:layout_width="wrap_content"
+						    	android:layout_height="wrap_content"
+						    	android:layout_alignParentLeft="true"
+						    	android:layout_marginLeft="10dp"
+						    	android:textSize="14dp"
+						    	android:text="far" />
+						    <SeekBar
+						        android:id="@+id/beaconThresholdSeekBar"
+						        android:layout_width="fill_parent"
+						    	android:layout_height="wrap_content"
+						    	android:minHeight="30dp"
+						    	android:layout_centerInParent="true"
+						    	android:layout_marginTop="4dp"
+						    	android:max="40"
+						    	android:progress="20" />
+						    <TextView
+						    	android:layout_width="wrap_content"
+						    	android:layout_height="wrap_content"
+						    	android:layout_alignParentRight="true"
+						    	android:layout_marginRight="10dp"
+						    	android:textSize="14dp"
+						    	android:text="near" />
+					    </RelativeLayout>
+					    <TextView
+					        android:id="@+id/beaconToleranceTextView"
+					    	android:layout_width="fill_parent"
+					    	android:layout_height="wrap_content"
+					    	android:gravity="center_horizontal"
+					    	android:textSize="15dp"
+			    			android:textColor="#ff0000"
+					    	android:text="Tolerance: 8" />
+					    <RelativeLayout
+						    android:layout_width="fill_parent"
+						    android:layout_height="wrap_content" >
+						    <TextView
+						    	android:layout_width="wrap_content"
+						    	android:layout_height="wrap_content"
+						    	android:layout_alignParentLeft="true"
+						    	android:layout_marginLeft="10dp"
+						    	android:textSize="14dp"
+						    	android:text="low" />
+						    <SeekBar
+						        android:id="@+id/beaconToleranceSeekBar"
+						        android:layout_width="fill_parent"
+						    	android:layout_height="wrap_content"
+						    	android:minHeight="30dp"
+						    	android:layout_centerInParent="true"
+						    	android:max="20"
+						    	android:progress="10" />
+						    <TextView
+						    	android:layout_width="wrap_content"
+						    	android:layout_height="wrap_content"
+						    	android:layout_alignParentRight="true"
+						    	android:layout_marginRight="10dp"
+						    	android:textSize="14dp"
+						    	android:text="high" />
+					    </RelativeLayout>
+					</LinearLayout>
+				    
+					<LinearLayout
+					    android:id="@+id/changeAutoView"
+					    android:visibility="visible"
+				        android:layout_width="fill_parent"
+					    android:layout_height="fill_parent"
+					    android:orientation="vertical"
+					    android:background="#ffffff" >
+					    <LinearLayout
+				        android:layout_width="fill_parent"
+					    android:layout_height="wrap_content"
+					    android:orientation="horizontal"
+					    android:weightSum="100" >
+					    <Button
+					        android:id="@+id/inCarButton"
+					    	android:layout_width="fill_parent"
+					    	android:layout_height="wrap_content"
+					    	android:minHeight="40dp"
+					    	android:layout_weight="50"
+					    	android:layout_margin="10dp"
+					    	android:layout_alignParentLeft="true"
+					    	android:background="@drawable/plum_button"
+					    	android:textColor="#ffffff"
+					    	android:textSize="17dp"
+					    	android:textStyle="bold"
+					    	android:text="On Car" />
+					    <Button
+					        android:id="@+id/offCarButton"
+					    	android:layout_width="fill_parent"
+					    	android:layout_height="wrap_content"
+					    	android:minHeight="40dp"
+					    	android:layout_weight="50"
+					    	android:layout_margin="10dp"
+					    	android:layout_alignParentRight="true"
+					    	android:background="@drawable/cyan_button"
+					    	android:textColor="#ffffff"
+					    	android:textSize="17dp"
+					    	android:textStyle="bold"
+					    	android:text="Off Car" />
+						</LinearLayout>
+					    <RelativeLayout
+					        android:layout_width="fill_parent"
+						    android:layout_height="wrap_content"
+						    android:orientation="horizontal"
+						    android:layout_marginLeft="10dp"
+						    android:layout_marginRight="10dp" >
+					    	<Button
+						        android:id="@+id/resetbutton"
+						        android:layout_width="wrap_content"
+						    	android:layout_height="wrap_content"
+						    	android:minHeight="30dp"
+						    	android:background="@drawable/red_button"
+						    	android:layout_alignParentRight="true"
+						    	android:textColor="#ffffff"
+						    	android:textSize="16dp"
+						    	android:text="Reset" />
+						    <TextView
+						        android:id="@+id/messageTextView"
+						    	android:layout_width="match_parent"
+						    	android:layout_height="match_parent"
+						    	android:layout_toLeftOf="@id/resetbutton"
+						    	android:textSize="14dp"
+						    	android:textColor="#ff0000"
+						    	android:lines="2"
+		    					android:maxLines="2"
+						    	android:text="Get into your car, and press &quot;On Car&quot; Button" />
+					    </RelativeLayout>
+				    </LinearLayout>
+			</RelativeLayout>
+		</LinearLayout>
+			
+	    </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

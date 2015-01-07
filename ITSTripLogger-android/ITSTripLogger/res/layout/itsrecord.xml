@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ucdavis.its.ITSTripLogger.ITSTabBarActivity" >
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_margin="10dp"
+    android:layout_centerHorizontal="true"
+    android:textColor="#0000ff"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:text="Records" />
+    <Button
+    android:id="@+id/refresehButton"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:layout_alignParentRight="true"
+    android:layout_margin="2dp"
+    android:textColor="#ff0000"
+    android:textSize="15dp"
+    android:textStyle="bold"
+    android:text="Refresh" />
+    <LinearLayout
+	android:id="@+id/Linearlayout"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:layout_marginTop="40dp"
+	android:orientation="vertical"
+	android:weightSum="100" >
+		<fragment
+          android:id="@+id/map"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="50"
+          android:name="com.google.android.gms.maps.SupportMapFragment"
+          android:clickable="true"/>
+	    <!-- <com.google.android.gms.maps.MapView
+	    android:id="@+id/mapview"
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+	    android:layout_weight="50"
+	    android:clickable="true"
+	    android:apiKey="API_KEY" /> -->
+	    <ListView
+	    android:id="@android:id/list"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:layout_weight="50" />
+    </LinearLayout>
+</RelativeLayout>

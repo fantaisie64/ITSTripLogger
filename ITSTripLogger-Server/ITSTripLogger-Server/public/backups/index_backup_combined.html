@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+    <head>
+        <style style="text/css">
+        #title {
+            margin: auto;
+            width: auto;
+            text-align:center;
+            font-size:30px;
+        }
+
+        #signinContainer {
+            min-width: 300px;
+            min-height: 300px; 
+            width: 300px;
+            height: 300px;
+            margin: auto;
+            background: red;
+        }
+
+        #inputSiginUsername, #inputSiginPassword {
+            margin: auto;
+            min-width: 240px;
+            width: 240px;
+        }
+
+        th {
+            font-size:14px;
+        }
+
+        .table-striped tbody td {
+            background-color: white;
+        }
+
+        .table-striped tbody tr.highlight td {
+            background-color: yellow;
+        }
+
+        </style>
+        <title>ITS Trip Viewer</title>
+        <script type="text/javascript" src="/public/js/jquery.min.js"></script>
+        <script type="text/javascript">
+        $(document).ready(function () {
+            $("#signinContainer").show();
+            $("#userContainer").hide();
+            $('#buttonSignin').click(function () {
+                console.log("Signing In...");
+                var signInPayload = {
+                    username: $('#inputUsername').val(),
+                    password: $('#inputPassword').val()
+                };
+
+                $.ajax({
+                    url: "/web_signin",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(signInPayload),
+                    complete: function (data) {
+                        $("#signinContainer").hide();
+                        $("#userContainer").show();
+                        initUserPage();
+                        //location.reload();
+                    }
+                });
+            });
+
+
+            $('#user-submit').click(function () {
+                var currentdate = new Date(); 
+                var datetime = 
+                currentdate.getFullYear() + "-" 
+                + (currentdate.getMonth()+1)  + "-" 
+                + currentdate.getDate() + " " 
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+            
+                var payload = {
+                    user_id: $('#inputUserid').val(),
+                    user_username: $('#inputUsername').val(),
+                    user_email: $('#inputEmail').val(),
+                    user_lname: $('#inputLname').val(),
+                    user_fname: $('#inputFname').val(),
+                    type: $('#inputType:checked').val(),
+                    latitude: $('#inputLatitude').val(),
+                    longitude: $('#inputLongitude').val(),
+                    time_stamp: datetime,
+                    bt_id: $('#inputBtId').val(),
+                    bt_major: $('#inputBtId').val(),
+                    bt_minor: $('#inputBtId').val()
+                };
+ 
+                $.ajax({
+                    url: "/insertRecord",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html("Records:\n");//+data.responseText);
+                        responseJSON = $.parseJSON(data.responseText);
+                        buildHtmlTable(responseJSON, false);
+                        //window.location.reload();
+                    }
+                });
+            });
+        });
+
+        var responseJSON = null;
+        var columns;
+
+        function initUserPage () {
+            // initial
+            $.ajax({
+                url: "/init",
+                type: "POST",
+                contentType: "application/json",
+                processData: false,
+                data: null,
+                complete: function (data) {
+                    $('#output').html("Records:\n");//+data.responseText);
+                    responseJSON = $.parseJSON(data.responseText);
+                    buildHtmlTable(responseJSON, true);
+                    if(responseJSON!=null){
+                        var srcURL = "https://maps.google.com/maps?q="+responseJSON[0]["latitude"]+","+responseJSON[0]["longitude"]+"&t=m&z=17&output=embed";
+                        $("#dataMap").attr("src", srcURL);
+                    }
+                }
+            });
+        }
+        
+        function buildHtmlTable(jsonData, initial) {
+            if (initial)
+                columns = addAllColumnHeaders(jsonData);
+
+            for (var i = 0 ; i < jsonData.length ; i++) {
+                var row$ = $('<tr/>');
+                for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+                    var cellValue = jsonData[i][columns[colIndex]];
+
+                    if (cellValue == null) { cellValue = ""; }
+
+                    row$.append($('<td/>').html(cellValue));
+                }
+                $("#dataTable").append(row$);
+            }
+        }
+        
+        function addAllColumnHeaders(jsonData){
+            var columnSet = [];
+            var headerTr$ = $('<tr/>');
+
+            for (var i = 0 ; i < jsonData.length ; i++) {
+                var rowHash = jsonData[i];
+                for (var key in rowHash) {
+                    if ($.inArray(key, columnSet) == -1){
+                        columnSet.push(key);
+                        headerTr$.append($('<th/>').html(key));
+                    }
+                }
+            }
+            $("#dataTable").append(headerTr$);
+
+            return columnSet;
+        }
+        </script>
+    </head>
+    <body>
+        <h1 id="title">ITS Trip Viewer</h1>
+        <div id="signinContainer">
+            <p>
+                <h2 id="signin">Sign In</h2>
+            </p>
+            <p>
+                <h3>Username or Email</h3>
+            </p>
+            <p>
+                <input id="inputSiginUsername" type="text" />
+            </p>
+            <p>
+                <h3>Password</h3>
+            </p>
+            <p>
+                <input id="inputSiginPassword" type="text" />
+            </p>
+            <p>
+                <button id="buttonSignin">Sign In</button>
+            </p>
+        </div>
+        <div id="userContainer">
+            <h3>Enter user data into the database:</h3>
+            <table border="1">
+                <tr>
+                    <th>id</th>
+                    <th>user_id</th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>lname</th>
+                    <th>fname</th>
+                    <th>type</th>
+                    <th>latitude</th>
+                    <th>longitude</th>
+                    <th>time_stamp</th>
+                    <th>bt_id</th>
+                    <th>bt_major</th>
+                    <th>bt_minor</th>
+                </tr>
+                <tr>
+                    <th>Auto</th>
+                    <th><input id="inputUserid" type="text" /></th>
+                    <th><input id="inputUsername" type="text" /></th>
+                    <th><input id="inputEmail" type="text" /></th>
+                    <th><input id="inputLname" type="text" /></th>
+                    <th><input id="inputFname" type="text" /></th>
+                    <th><input type="radio" id="inputType" name="input_type" value="start" checked="true">start
+                        <input type="radio" id="inputType" name="input_type" value="end">end</th>
+                    <th><input id="inputLatitude" type="text" /></th>
+                    <th><input id="inputLongitude" type="text" /></th>
+                    <th>Auto</th>
+                    <th><input id="inputBtId" type="text" /></th>
+                    <th><input id="inputBtMajor" type="text" /></th>
+                    <th><input id="inputBtMinor" type="text" /></th>
+                </tr>
+            </table>
+            <br/>
+
+            <input id="user-submit" type="submit" />
+            <br/>
+            <br/>
+            <p id="output"></p><button id="user-refresh" type="button">Refresh</button>
+            <table id="dataTable" class="table-striped" border="1" />
+            <iframe id="dataMap" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=0,0&t=m&z=17&output=embed"></iframe>
+        <div>
+    </body>
+</html>

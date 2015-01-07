@@ -1,0 +1,420 @@
+<!doctype html>
+<html>
+    <head>
+        <style style="text/css">
+        #title {
+            margin: auto;
+            width: auto;
+            text-align:center;
+            font-size:30px;
+            color: rgb(100,100,255);
+        }
+
+        #signinContainer {
+            min-width: 320px;
+            min-height: 340px; 
+            width: 320px;
+            height: 340px;
+            margin: auto;
+            background: rgb(200,200,255);
+        }
+
+        #signinSubContainer {
+            vertical-align: center;
+            min-width: 240px;
+            min-height: 280px;
+            width: 240px;
+            height: 280px;
+            margin: auto; 
+            background: transparent;
+        }
+
+        #inputSiginUsername, #inputSiginPassword {
+            margin: auto;
+            min-width: 240px;
+            width: 240px;
+        }
+
+        th, td {
+            font-size:12px;
+        }
+
+        #buttonSignout {
+            float:right;
+            margin-right: 0px;
+        }
+
+        .table-striped tbody td {
+            background-color: white;
+        }
+
+        .table-striped tbody tr.highlight td {
+            background-color: yellow;
+        }
+
+        #loadingImage {
+            display:none;
+            margin-left:-80px;
+            margin-top:-160px;
+            margin-bottom:-100px;
+            width: 200px;
+        }
+
+        </style>
+        <title>ITS Trip Viewer</title>
+        <script type="text/javascript" src="/public/js/jquery.min.js"></script>
+        <script type="text/javascript">
+        var globalToken = 'ITSTRIPPROJECT2014';
+        var allUserRecords = null;
+        var globalUserToken = null;
+        var globalUserId, globalUserUsername, globalUserEmail, globalUserLname, globalUserFname;
+        var globalHouseholdId, globalHouseholdName;
+        var globalTimestamp;
+        $(document).ready(function () {
+            //signin
+            //$('#signinContainer').show();
+            //$('#signinErrorText').hide();
+            //$('#loadingImage').hide();
+            //$('#userContainer').hide();
+            //$('#userErrorText').hide();
+            $('#inputSigninUsername').bind('keyup', function(e) {
+                $('#signinErrorText').html('');
+                $('#signinErrorText').hide();
+                if (e.which == 13) {
+                    e.preventDefault();
+                    $('#buttonSignin').click();
+                }else{
+                    $("#inputSigninPassword").val('');
+                }
+            });
+
+            $('#inputSigninPassword').bind('keyup', function(e) {
+                $('#signinErrorText').html('');
+                $('#signinErrorText').hide();
+                if (e.which == 13) {
+                    e.preventDefault();
+                    $('#buttonSignin').click();
+                }
+            });
+
+            $('#buttonSignin').click(function () {
+                event.preventDefault();
+                $('#loadingImage').show();
+                $("#signinErrorText").html('');
+                $('#signinErrorText').hide();
+                console.log("Signing In...");
+
+                var verification = {
+                    globalToken: globalToken
+                }
+
+                var signinPayload = {
+                    username: $('#inputSigninUsername').val(),
+                    password: $('#inputSigninPassword').val()
+                };
+
+                $.ajax({
+                    url: "/web_signin",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify({message:'signin', verification:verification, data:signinPayload}),
+                    complete: function (data) {
+                        var responseJSON = $.parseJSON(data.responseText);
+                        if(responseJSON.message == "signinSuccess"){
+                            //assign personal data
+                            globalUserToken = responseJSON.verification.token;
+                            globalUserId = responseJSON.data.id;
+                            globalUserUsername = responseJSON.data.username;
+                            globalUserEmail = responseJSON.data.email;
+                            globalUserLname = responseJSON.data.lname;
+                            globalUserFname = responseJSON.data.fname;
+                            globalHouseholdId = responseJSON.data.household_id;
+                            globalHouseholdName = responseJSON.data.household_name;
+                            globalTimestamp = responseJSON.data.timestamp;
+
+                            $('#globalUserd').html(globalUserId);
+                            $('#globalUserUsername').html(globalUserUsername);
+                            $('#globalUserEmail').html(globalUserEmail);
+                            $('#globalUserLname').html(globalUserLname);
+                            $('#globalUserFname').html(globalUserFname);
+                            $('#globalHouseholdId').html(globalHouseholdId);
+                            $('#globalHouseholdName').html(globalHouseholdName);
+                            $('#globalTimestamp').html(globalTimestamp);
+
+                            var verification = {
+                                globalToken: globalToken,
+                                token: globalUserToken,
+                                id: globalUserId,
+                                username: globalUserUsername,
+                                email: globalUserEmail
+                            }
+                            initUserPage(verification);
+                            //location.reload();
+
+                            console.log("Sign in Success");
+                            $("#inputSigninPassword").val('');
+                            $('#signinErrorText').hide();
+                            $("#signinContainer").hide();
+                            $("#userContainer").show();
+
+                            
+                        }else if(responseJSON.message == "signinFail"){
+                            console.log("Sign in Fail");
+                            $('#signinErrorText').html('! Incorrect Username or Password');
+                            $('#signinErrorText').show();
+                        }else if(responseJSON.message == "signinGlobalTokenFail"){
+                            console.log("Sign in Golobal Token Fail");
+                            $('#signinErrorText').html('! Sign in Golobal Token Fail');
+                            $('#signinErrorText').show();
+                        }
+                        $('#loadingImage').hide();
+                    }
+                });
+            });
+
+
+            $('#user-submit').click(function () {
+                $('#userErrorText').html('');
+                $('#userErrorText').hide();
+                var currentdate = new Date(); 
+                var datetime = 
+                currentdate.getFullYear() + "-" 
+                + (currentdate.getMonth()+1)  + "-" 
+                + currentdate.getDate() + " " 
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+                var verification = {
+                    globalToken: globalToken,
+                    token: globalUserToken,
+                    id: globalUserId,
+                    username: globalUserUsername,
+                    email: globalUserEmail
+                }
+
+                var payload = {
+                    //id: Auto,
+                    user_id: globalUserId, //$('#inputUserid').val(),
+                    user_username: globalUserUsername,//$('#inputUsername').val(),
+                    user_email: globalUserEmail,//$('#inputEmail').val(),
+                    user_lname: globalUserLname,//$('#inputLname').val(),
+                    user_fname: globalUserFname,//$('#inputFname').val(),
+                    household_id: globalHouseholdId,//$('#inputHouseholdid').val(),
+                    household_name: globalHouseholdName,//$('#inputHouseholdname').val(),
+                    type: $('#inputType:checked').val(),
+                    latitude: $('#inputLatitude').val(),
+                    longitude: $('#inputLongitude').val(),
+                    timestamp: datetime,
+                    bt_id: $('#inputBtId').val(),
+                    bt_major: $('#inputBtMajor').val(),
+                    bt_minor: $('#inputBtMinor').val(),
+                    bt_name: $('#inputBtName').val
+                };
+ 
+                $.ajax({
+                    url: "/web_insertRecord",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify({message:'insertRecord', verification:verification ,data:payload}),
+                    complete: function (data) {
+                        var responseJSON = $.parseJSON(data.responseText);
+                        if(responseJSON.message == "insertRecordSuccess"){
+                        $('#output').html("Records:\n");//+data.responseText);
+                        allUserRecords.push(responseJSON.data);
+                        buildHtmlTable(responseJSON.data, false);
+                        //window.location.reload();
+                        }else{
+                            $('#userErrorText').html(responseJSON.message);
+                            $('#userErrorText').show();
+                        }
+                    }
+                });
+            });
+
+            $('#dataTable tbody tr').live('click', function(event) {
+                $(this).addClass('highlight').siblings().removeClass('highlight');
+                if(allUserRecords!=null && allUserRecords.length != 0){
+                    var srcURL = "https://maps.google.com/maps?q="+allUserRecords[$(this).index()-1]["latitude"]+","+allUserRecords[$(this).index()-1]["longitude"]+"&t=m&z=17&output=embed";
+                    $("#dataMap").attr("src", srcURL);
+                }
+            });
+
+            $('#user-refresh').click(function () {
+                console.log("Refresh...");
+                $('#userErrorText').html('');
+                $('#userErrorText').hide();
+                var verification = {
+                    globalToken: globalToken,
+                    token: globalUserToken,
+                    id: globalUserId,
+                    username: globalUserUsername,
+                    email: globalUserEmail
+                }
+                initUserPage(verification);
+            });
+
+            $('#buttonSignout').click(function () {
+                console.log("Sign Out");
+                $("#dataTable").empty();
+                allUserRecords = null;
+                globalUserToken = null;
+                globalUserId = globalUserUsername = globalUserEmail = globalUserLname = globalUserFname = null;
+                globalHouseholdId = globalHouseholdName = null;
+                var globalTimestamp;
+                $("#signinContainer").show();
+                $("#userContainer").hide();
+            });
+        });
+
+        var responseJSON = null;
+        var columns;
+
+        function initUserPage (verification) { //for verification
+            // initial
+            $("#dataTable").empty();
+            $.ajax({
+                url: "/web_showRecord",
+                type: "POST",
+                contentType: "application/json",
+                processData: false,
+                data: JSON.stringify({message:'showRecord', verification:verification}),
+                complete: function (data) {
+                    var responseJSON = $.parseJSON(data.responseText);
+                    if(responseJSON.message == "showRecordSuccess"){
+                        $('#output').html("Records:\n");//+data.responseText);
+                        allUserRecords = responseJSON.data;
+                        buildHtmlTable(allUserRecords, true);
+                        if(allUserRecords!=null && allUserRecords.length != 0){
+                            var srcURL = "https://maps.google.com/maps?q="+allUserRecords[0]["latitude"]+","+allUserRecords[0]["longitude"]+"&t=m&z=17&output=embed";
+                            $("#dataMap").attr("src", srcURL);
+                        }
+                    }else{
+                        $('#userErrorText').html(responseJSON.message);
+                        $('#userErrorText').show();
+                    }
+                }
+            });
+        }
+        
+        function buildHtmlTable(jsonData, initial) {
+            if (initial)
+                columns = addAllColumnHeaders(jsonData);
+
+            for (var i = 0 ; i < jsonData.length ; i++) {
+                var row$ = $('<tr/>');
+                for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+                    var cellValue = jsonData[i][columns[colIndex]];
+
+                    if (cellValue == null) { cellValue = ""; }
+
+                    row$.append($('<td/>').html(cellValue));
+                }
+                $("#dataTable").append(row$);
+            }
+        }
+        
+        function addAllColumnHeaders(jsonData){
+            var columnSet = [];
+            var headerTr$ = $('<tr/>');
+
+            for (var i = 0 ; i < jsonData.length ; i++) {
+                var rowHash = jsonData[i];
+                for (var key in rowHash) {
+                    if ($.inArray(key, columnSet) == -1){
+                        columnSet.push(key);
+                        headerTr$.append($('<th/>').html(key));
+                    }
+                }
+            }
+            $("#dataTable").append(headerTr$);
+
+            return columnSet;
+        }
+        </script>
+    </head>
+    <body>
+        <h1 id="title">ITS Trip Viewer</h1>
+        <div id="signinContainer">
+        <div id="signinSubContainer">
+            <h2 id="signin">Sign In</h2>
+            <h3>Username or Email</h3>
+            <p><input id="inputSigninUsername" type="text" autofocus/></p>
+            <h3>Password</h3>
+            <p><input id="inputSigninPassword" type="password" /></p>
+            <p>
+            <h4 id="signinErrorText" style="display:none;color:red;"></h4>
+            <input id="buttonSignin" type="submit" value="Sign In"/>
+            <img id="loadingImage" src="/public/images/loading.gif"/>
+            </p>
+            <font>Not A Member? </font><a href="/web_signupPage">Sign Up</a>
+        </div>
+        </div>
+        <div id="userContainer" style="display:none;">
+            <p>
+               <buton id="buttonSignout">Sign Out</button> 
+            </p>
+            <p><font>User Id:</font><font id="globalUserd"></font></p>
+            <p><font>Username:</font><font id="globalUserUsername"></font></p>
+            <p><font>Email:</font><font id="globalUserEmail"></font></p>
+            <p><font>Last Name:</font><font id="globalUserLname"></font></p>
+            <p><font>First Name:</font><font id="globalUserFname"></font></p>
+            <p><font>Household Id:</font><font id="globalHouseholdId"></font></p>
+            <p><font>Household Name:</font><font id="globalHouseholdName"></font></p>
+            <p><font>Register Time:</font><font id="globalTimestamp"></font></p>
+            </p>
+            <br/>
+            <h4 id="userErrorText" style="display:none;color:red;"></h4>
+            <div id="insertContainer" style="display:none;">
+                <h3>Enter user data into the database:</h3>
+                <table border="1">
+                    <tr>
+                        <th>id</th>
+                        <th>user_id</th>
+                        <th>username</th>
+                        <th>email</th>
+                        <th>lname</th>
+                        <th>fname</th>
+                        <th>household_id</th>
+                        <th>household_name</th>
+                        <th>type</th>
+                        <th>latitude</th>
+                        <th>longitude</th>
+                        <th>timestamp</th>
+                        <th>bt_id</th>
+                        <th>bt_major</th>
+                        <th>bt_minor</th>
+                        <th>bt_name</th>
+                    </tr>
+                    <tr>
+                        <th>Auto</th>
+                        <th>Auto</th><!-- <th><input id="inputUserid" type="text" /></th> -->
+                        <th>Auto</th><!-- <th><input id="inputUsername" type="text" /></th> -->
+                        <th>Auto</th><!-- <th><input id="inputEmail" type="text" /></th> -->
+                        <th>Auto</th><!-- <th><input id="inputLname" type="text" /></th> -->
+                        <th>Auto</th><!-- <th><input id="inputFname" type="text" /></th> -->
+                        <th>Auto</th><!-- <th><input id="inputHouseholdid" type="text" /></th> -->
+                        <th>Auto</th><!-- <th><input id="inputHouseholdname" type="text" /></th> -->
+                        <th><input type="radio" id="inputType" name="input_type" value="start" checked="true">start
+                            <input type="radio" id="inputType" name="input_type" value="end">end</th>
+                        <th><input id="inputLatitude" type="text" /></th>
+                        <th><input id="inputLongitude" type="text" /></th>
+                        <th>Auto</th>
+                        <th><input id="inputBtId" type="text" /></th>
+                        <th><input id="inputBtMajor" type="text" /></th>
+                        <th><input id="inputBtMinor" type="text" /></th>
+                        <th><input id="inputBtName" type="text" /></th>
+                    </tr>
+                </table>
+                <br/>
+                <input id="user-submit" type="submit" />
+            </div>
+            <br/>
+            <br/>
+            <p id="output"></p><button id="user-refresh" type="button">Refresh</button>
+            <table id="dataTable" class="table-striped" border="1" />
+            <iframe id="dataMap" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=0,0&t=m&z=17&output=embed"></iframe>
+        </div>
+    </body>
+</html>

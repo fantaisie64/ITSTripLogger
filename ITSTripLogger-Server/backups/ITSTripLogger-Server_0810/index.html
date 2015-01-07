@@ -1,0 +1,168 @@
+<!doctype html>
+<html>
+  <head>
+	<style style="text/css">
+	.table-striped tbody td {
+    	background-color: white;
+	}
+
+	.table-striped tbody tr.highlight td {
+    	background-color: yellow;
+	}
+	</style>
+
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript">
+    var responseJSON = null;
+    var columns;
+    
+    function buildHtmlTable(jsonData, initial) {
+    	if (initial)
+    		columns = addAllColumnHeaders(jsonData);
+
+    	for (var i = 0 ; i < jsonData.length ; i++) {
+        	var row$ = $('<tr/>');
+        	for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+            	var cellValue = jsonData[i][columns[colIndex]];
+
+            	if (cellValue == null) { cellValue = ""; }
+
+            	row$.append($('<td/>').html(cellValue));
+        	}
+        	$("#dataTable").append(row$);
+    	}
+	}
+	
+	function addAllColumnHeaders(jsonData){
+    	var columnSet = [];
+    	var headerTr$ = $('<tr/>');
+
+    	for (var i = 0 ; i < jsonData.length ; i++) {
+        	var rowHash = jsonData[i];
+        	for (var key in rowHash) {
+            	if ($.inArray(key, columnSet) == -1){
+                	columnSet.push(key);
+                	headerTr$.append($('<th/>').html(key));
+            	}
+        	}
+    	}
+    	$("#dataTable").append(headerTr$);
+
+    	return columnSet;
+	}
+	
+        $(document).ready(function () {
+        	// initial
+        	$.ajax({
+                    url: "/init",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: null,
+                    complete: function (data) {
+                        $('#output').html("Records:\n");//+data.responseText);
+                        responseJSON = $.parseJSON(data.responseText);
+                        buildHtmlTable(responseJSON, true);
+                        if(responseJSON!=null){
+                        	var srcURL = "https://maps.google.com/maps?q="+responseJSON[0]["latitude"]+","+responseJSON[0]["longitude"]+"&t=m&z=17&output=embed";
+            				$("#dataMap").attr("src", srcURL);
+            			}
+                    }
+                });
+        
+            $('#user-submit').click(function () {
+            	var currentdate = new Date(); 
+				var datetime = 
+				currentdate.getFullYear() + "-" 
+				+ (currentdate.getMonth()+1)  + "-" 
+				+ currentdate.getDate() + " " 
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+            
+                var payload = {
+                	user_id: $('#input_user_id').val(),
+                    user_name: $('#input_user_name').val(),
+                    email: $('#input_email').val(),
+                    lname: $('#input_lname').val(),
+                    fname: $('#input_fname').val(),
+                    type: $('#input_type:checked').val(),
+                    latitude: $('#input_latitude').val(),
+                    longitude: $('#input_longitude').val(),
+                    time_stamp: datetime,
+                    bt_id: $('#input_bt_id').val()
+                };
+ 
+                $.ajax({
+                    url: "/users",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify(payload),
+                    complete: function (data) {
+                        $('#output').html("Records:\n");//+data.responseText);
+                        responseJSON = $.parseJSON(data.responseText);
+                        buildHtmlTable(responseJSON, false);
+                        //window.location.reload();
+                    }
+                });
+            });
+            
+            $('#user-refresh').click(function () {
+            	location.reload();
+            });
+        });
+        
+        $('#dataTable tbody tr').live('click', function(event) {
+    		$(this).addClass('highlight').siblings().removeClass('highlight');
+    		if(responseJSON!=null){
+    			var srcURL = "https://maps.google.com/maps?q="+responseJSON[$(this).index()-1]["latitude"]+","+responseJSON[$(this).index()-1]["longitude"]+"&t=m&z=17&output=embed";
+            	$("#dataMap").attr("src", srcURL);
+            }
+		});
+    </script>
+  </head>
+  <body>
+    <h3>Enter user data into the database:</h3>
+    <table border="1">
+  		<tr>
+    		<td>id</th>
+    		<th>user_id</th>
+    		<th>user_name</th>
+    		<th>email</th>
+            <th>lname</th>
+            <th>fname</th>
+    		<th>type</th>
+    		<th>latitude</th>
+    		<th>longitude</th>
+    		<th>time_stamp</th>
+    		<th>bt_id</th>
+  		</tr>
+  		<tr>
+    		<th>Auto</th>
+    		<th><input id="input_user_id" type="text" /></th>
+    		<th><input id="input_user_name" type="text" /></th>
+    		<th><input id="input_email" type="text" /></th>
+            <th><input id="input_lname" type="text" /></th>
+            <th><input id="input_fname" type="text" /></th>
+    		<th><input type="radio" id="input_type" name="input_type" value="start" checked="true">start
+				<input type="radio" id="input_type" name="input_type" value="end">end</th>
+    		<th><input id="input_latitude" type="text" /></th>
+    		<th><input id="input_longitude" type="text" /></th>
+    		<th>Auto</th>
+    		<th><input id="input_bt_id" type="text" /></th>
+  		</tr>
+	</table>
+	<br/>
+    <!-- 
+<input id="user-name" type="text" />
+    <input id="user_email" type="text" />
+ -->
+    <input id="user-submit" type="submit" />
+    <br/>
+    <br/>
+    <p id="output"></p><button id="user-refresh" type="button">Refresh</button>
+    <table id="dataTable" class="table-striped" border="1" />
+    <iframe id="dataMap" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=0,0&t=m&z=17&output=embed"></iframe>
+  </body>
+</html>

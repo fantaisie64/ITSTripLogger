@@ -1,0 +1,407 @@
+<!doctype html>
+<html>
+	<head>
+		<style style="text/css">
+		#title {
+            margin: auto;
+            width: auto;
+            text-align:center;
+            font-size:30px;
+            color: rgb(100,100,255);
+        }
+
+		#container { 
+			width: 320px;
+			height: 1240px;
+			margin: auto;
+			background: rgb(200,200,255);
+		}
+
+        #subContainer {
+            width: 280px;
+            height: 1220px;
+            margin: auto;
+            background: transparent;
+            overflow: hidden;
+        }
+
+		input.textField {
+			margin: auto;
+			min-width: 240px;
+			width: 240px;
+		}
+
+		#inputHouseholdSearchContainer {
+			min-width: 280px;
+			min-height: 100px; 
+			width: 280px;
+			height: 100px;
+			margin: 0 auto;
+			padding: 0 auto;
+			position: absolute;
+			overflow: auto;
+			background-color: white;
+		}
+
+		#inputHouseholdSearchTable{
+			width: 260px;
+			height: auto;
+		}
+
+		th, tr {
+			font-size:10px;
+		}
+
+		.table-striped tbody td {
+            background-color: white;
+        }
+
+        .table-striped tbody tr.highlight td {
+            background-color: yellow;
+        }
+
+        #inputSignupHouseholdIdText {
+        	margin-top: 0px;
+        }
+
+		</style>
+		<title>ITS Trip Viewer</title>
+		<script type="text/javascript" src="/public/js/jquery.min.js"></script>
+		<script type="text/javascript">
+		var globalToken = 'ITSTRIPPROJECT2014';
+		var householdSearchResults = [];
+		$(document).ready(function () {
+			//hide search
+			$('#inputHouseholdSearchText').hide();
+			$('#inputHouseholdSearch').hide();
+			$('#buttonHouseholdSearch').hide();
+			$('#inputHouseholdSearchContainer').hide();
+			$('#inputHouseholdSearchTable').hide();
+
+            $('#inputSignupHouseholdId').prop('disabled', true);
+            $('#inputSignupHouseholdId').val('Auto');
+
+			//$('#signupErrorText').hide();
+			$("input[name='inputHouseholdSelection']").change(function () {
+				if($("input[name='inputHouseholdSelection']:checked").val() === 'new'){
+					$('#inputSignupHouseholdIdText').css('margin-top', "0px");
+					$('#inputSignupHouseholdId').prop('disabled', false);
+					$('#inputSignupHouseholdName').prop('disabled', false);
+	            	$('#inputSignupHouseholdAddress').prop('disabled', false);
+	            	$('#inputSignupHouseholdId').val('Auto');
+	            	$('#inputSignupHouseholdName').val('');
+	            	$('#inputSignupHouseholdAddress').val('');
+	            	$('#inputSignupHouseholdZipcode').val('');
+
+	            	$('#inputHouseholdSearchText').hide();
+       				$('#inputHouseholdSearch').hide();
+       				$('#inputHouseholdSearch').val('');
+       				$('#buttonHouseholdSearch').hide();
+       				$('#inputHouseholdSearchContainer').hide();
+       				$('#inputHouseholdSearchTable').hide();
+       				$('#inputHouseholdSearchTable').empty();
+       				$("#inputHouseholdSearchTableText").html('');
+				}else if($("input[name='inputHouseholdSelection']:checked").val() === 'existing'){
+					$('#inputSignupHouseholdIdText').css('margin-top', "120px");
+	            	$('#inputSignupHouseholdName').prop('disabled', true);
+	            	$('#inputSignupHouseholdAddress').prop('disabled', true);
+					$('#inputSignupHouseholdId').val('Select From Table...');
+	            	$('#inputSignupHouseholdName').val('Select From Table...');
+	            	$('#inputSignupHouseholdAddress').val('Select From Table...');
+	            	$('#inputSignupHouseholdZipcode').val('Select From Table...');
+
+	            	$('#inputHouseholdSearchText').show();
+       				$('#inputHouseholdSearch').show();
+       				$('#buttonHouseholdSearch').show();
+       				$('#inputHouseholdSearchContainer').show();
+       				$('#inputHouseholdSearchTable').show();
+				}
+			});
+
+			//search household
+			$('#inputHouseholdSearch').bind('keyup', function(e) {
+                if (e.which == 13) {
+                    e.preventDefault();
+                    $('#buttonHouseholdSearch').click();
+                }
+            });
+
+			$('#buttonHouseholdSearch').click(function () {
+				$('#signupErrorText').html('');
+				$('#signupErrorText').hide();
+				if($('#inputHouseholdSearch').val().length < 3){
+					console.log('Too Short Household Search String');
+					$('#signupErrorText').html('! Too Short Household Search String');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				//search household
+				console.log('Search Households...');
+				var verification = {
+	                    globalToken: globalToken
+	                }
+
+	            $.ajax({
+                    url: "/web_signupSearch",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify({message:'signupSearch', verification:verification, data:$('#inputHouseholdSearch').val()}),
+                    complete: function (data) {
+                    	var responseJSON = $.parseJSON(data.responseText);
+	                    if(responseJSON.message == "signupSearchSuccess"){
+	                    	$("#inputHouseholdSearchTableText").html('Results');
+	                    	$("#inputHouseholdSearchTable").empty();
+	                    	householdSearchResults = responseJSON.data;
+	                        buildHtmlTable(householdSearchResults);
+	                    }else if(responseJSON.message == "signupSearchNoResultSuccess"){
+	                        $("#inputHouseholdSearchTableText").html('No Results');
+	                        householdSearchResults = [];
+	                    }else{
+	                    	householdSearchResults = [];
+                        	$('#signupErrorText').html(responseJSON.message);
+                        	$('#signupErrorText').show();
+	                    }
+                    }
+                });
+
+			});
+
+			//select household
+			$('#inputHouseholdSearchTable tbody tr').live('click', function(event) {
+                $(this).addClass('highlight').siblings().removeClass('highlight');
+                if(householdSearchResults!=null && householdSearchResults.length != 0){
+                    //console.log(householdSearchResults[$(this).index()-1]);
+
+                    $('#inputSignupHouseholdId').val(householdSearchResults[$(this).index()-1]["id"]);
+        			$('#inputSignupHouseholdName').val(householdSearchResults[$(this).index()-1]["name"]);
+        			$('#inputSignupHouseholdAddress').val(householdSearchResults[$(this).index()-1]["address"]);
+        			$('#inputSignupHouseholdZipcode').val(householdSearchResults[$(this).index()-1]["zipcode"]);
+                }
+            });
+
+			$('#buttonSignup').click(function () {
+				$('#signupErrorText').html('');
+				$('#signupErrorText').hide();
+				//no empty column
+				if($('#inputSignupUsername').val() == '' ||
+	               $('#inputSignupEmail').val() == '' ||
+	               $('#inputSignupLname').val() == '' ||
+	               $('#inputSignupFname').val() == '' ||
+	               $('#inputSignupHouseholdId').val() == '' ||
+	               $('#inputSignupHouseholdName').val() == '' ||
+	               $('#inputSignupHouseholdAddress').val() == '' ||
+	               $('#inputSignupHouseholdZipcode').val() == '' ||
+	               $('#inputSignupPassword').val() == ''){
+					console.log('Column Cannot Be Empty');
+					$('#signupErrorText').html('! Column Cannot Be Empty');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				//check password consistent
+				if($('#inputSignupPassword').val() !== $('#inputSignupConfirmPassword').val()){
+					console.log('Password Inconsistent');
+					$('#signupErrorText').html('! Password Inconsistent');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				if($('#inputSignupPassword').val().toString().length < 8){
+					console.log('Password Too Short');
+					$('#signupErrorText').html('! Password Too Short (< 8)');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				//sign up
+				console.log("Signing Up..");
+				var currentdate = new Date(); 
+				var datetime = 
+                currentdate.getFullYear() + "-" 
+                + (currentdate.getMonth()+1)  + "-" 
+                + currentdate.getDate() + " " 
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+
+				var verification = {
+                    globalToken: globalToken
+                }
+
+                var householdId = $('#inputSignupHouseholdId').val() != "Auto" ? $('#inputSignupHouseholdId').val() : "-1";
+				var signupPayload = {
+                    username: $('#inputSignupUsername').val(),
+                    email: $('#inputSignupEmail').val(),
+                    lname: $('#inputSignupLname').val(),
+                    fname: $('#inputSignupFname').val(),
+                    household_id: householdId,
+                    household_name: $('#inputSignupHouseholdName').val(),
+                    household_address: $('#inputSignupHouseholdAddress').val(),
+                    household_zipcode: $('#inputSignupHouseholdZipcode').val(),
+                    timestamp: datetime,
+                    password: $('#inputSignupPassword').val()
+                };
+
+            	$.ajax({
+                    url: "/web_signup",
+                    type: "POST",
+                    contentType: "application/json",
+                    processData: false,
+                    data: JSON.stringify({message:'signup', verification:verification, data:signupPayload}),
+                    complete: function (data) {
+                        var responseJSON = $.parseJSON(data.responseText);
+                        if(responseJSON.message == "signupSuccess"){
+                        	console.log('Sign Up Success');
+                        	//hide all column
+                        	$('#inputSignupUsername').hide();
+                    		$('#inputSignupEmail').hide();
+                    		$('#inputSignupLname').hide();
+                    		$('#inputSignupFname').hide();
+                    		$('#inputSignupPassword').hide();
+                    		$('#inputSignupConfirmPassword').hide();
+                    		$('#householdTitle').hide();
+                    		$('#inputHouseholdSelectionContainer').hide();
+                    		$('#inputSignupHouseholdId').hide();
+                    		$('#inputSignupHouseholdName').hide();
+                    		$('#inputSignupHouseholdAddress').hide();
+                    		$('#inputSignupHouseholdZipcode').hide();
+
+                    		//hide all column text
+                    		$('#inputSignupUsernameText').hide();
+                    		$('#inputSignupEmailText').hide();
+                    		$('#inputSignupLnameText').hide();
+                    		$('#inputSignupFnameText').hide();
+                    		$('#inputSignupPasswordText').hide();
+                    		$('#inputSignupConfirmPasswordText').hide();
+                    		$('#inputSignupHouseholdIdText').hide();
+                    		$('#inputSignupHouseholdNameText').hide();
+                    		$('#inputSignupHouseholdAddressText').hide();
+                    		$('#inputSignupHouseholdZipcodeText').hide();
+
+                    		//hide search household
+                    		$('#inputHouseholdSearchText').hide();
+       						$('#inputHouseholdSearch').hide();
+       						$('#inputHouseholdSearch').val('');
+       						$('#buttonHouseholdSearch').hide();
+       						$('#inputHouseholdSearchContainer').hide();
+                    		
+                    		//hide signup button
+                    		$('#buttonSignup').hide();
+
+							$('#signupTitle').html('Sign Up Successfully');
+                        	$('#backMainPage').html('Log In');
+                            $('#container').height(180);
+                            $('#subContainer').height(160);
+                        }else{
+                        	console.log(responseJSON.message);
+                        	$('#signupErrorText').html(responseJSON.message);
+                        	$('#signupErrorText').show();
+                        }
+                    }
+                });
+            });
+		});
+
+		function buildHtmlTable(jsonData) {
+            columns = addAllColumnHeaders(jsonData);
+
+            for (var i = 0 ; i < jsonData.length ; i++) {
+                var row$ = $('<tr/>');
+                for (var colIndex = 0 ; colIndex < columns.length ; colIndex++) {
+                    var cellValue = jsonData[i][columns[colIndex]];
+
+                    if (cellValue == null) { cellValue = ""; }
+
+                    row$.append($('<td/>').html(cellValue));
+                }
+                $("#inputHouseholdSearchTable").append(row$);
+            }
+        }
+        
+        function addAllColumnHeaders(jsonData){
+            var columnSet = [];
+            var headerTr$ = $('<tr/>');
+
+            for (var i = 0 ; i < jsonData.length ; i++) {
+                var rowHash = jsonData[i];
+                for (var key in rowHash) {
+                    if ($.inArray(key, columnSet) == -1){
+                        columnSet.push(key);
+                        headerTr$.append($('<th/>').html(key));
+                    }
+                }
+            }
+            $("#inputHouseholdSearchTable").append(headerTr$);
+
+            return columnSet;
+        }
+		</script>
+	</head>
+	<body>
+		<h1 id="title">ITS Trip Viewer</h1>
+		<div id="container">
+        <div id="subContainer">
+			<h2 id="signupTitle">Sign Up</h2>
+			<p>
+			<h4 id="inputSignupUsernameText">Username</h4>
+            <input id="inputSignupUsername" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupEmailText">Email</h4>
+            <input id="inputSignupEmail" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupLnameText">Last Name</h4>
+            <input id="inputSignupLname" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupFnameText">First Name</h4>
+            <input id="inputSignupFname" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupPasswordText">Password</h4>
+            <input id="inputSignupPassword" type="password" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupConfirmPasswordText">Confirm Password</h4>
+            <input id="inputSignupConfirmPassword" type="password" />
+       		</p>
+       		<h2 id="householdTitle">Household</h2>
+       		<p id="inputHouseholdSelectionContainer">
+       		<input type="radio" id="inputHouseholdSelection" name="inputHouseholdSelection" value="new" checked="true">new</input>
+            <input type="radio" id="inputHouseholdSelection" name="inputHouseholdSelection" value="existing">existing</input>
+       		</p>
+       		<h4 id="inputHouseholdSearchText">Household Name Search (>2 Characters):</h4>
+       		<input id="inputHouseholdSearch" type="text" />
+       		<button id="buttonHouseholdSearch">Search</button>
+       		<div id="inputHouseholdSearchContainer">
+       			<table id="inputHouseholdSearchTable" class="table-striped" border="1">
+       				<h5 id="inputHouseholdSearchTableText"/>
+       			</table>
+       		</div>
+       		<p>
+            <h4 id="inputSignupHouseholdIdText">Household Id</h4>
+            <input id="inputSignupHouseholdId" type="text" />
+       		</p>
+       		<p>
+            <h4 id="inputSignupHouseholdNameText">Household Name</h4>
+            <input id="inputSignupHouseholdName" type="text" />
+       		</p>
+       		<p>
+            <h4 id="inputSignupHouseholdAddressText">Household Address</h4>
+            <input id="inputSignupHouseholdAddress" type="text" />
+       		</p>
+       		<p>
+            <h4 id="inputSignupHouseholdZipcodeText">Household Zipcode</h4>
+            <input id="inputSignupHouseholdZipcode" type="text" />
+       		</p>
+       		<h4 id="signupErrorText" style="display:none;color:red;"></h4>
+			<button id="buttonSignup">Register</button>
+			</p>
+			<a href="/" id="backMainPage">Cancel</a>
+		</div>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+	<head>
+		<style style="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+			border: 0;
+			overflow: hidden;
+			height: 100%; 
+			max-height: 100%; 
+		}
+
+		#container{
+		    width: 800px;
+		    margin-left: auto;
+		    margin-right: auto;
+		}
+
+		#title {
+            margin: auto;
+            width: auto;
+            text-align:center;
+            font-size:30px;
+            color: rgb(100,100,255);
+        }
+
+		#topContainer, #bottomContainer {
+			position: absolute;
+			top: 0;
+			width: 300px;
+			height: 500px;
+			overflow: hidden;
+			background: rgb(200,200,255);
+		}
+
+		#bottomContainer{
+			top: auto;
+			bottom: 0; 
+			height: 500px; /*Height of bottom frame div*/
+			overflow: hidden; /*Disable scrollbars. Set to "scroll" to enable*/
+			background-color: rgb(200,200,255);
+		}
+
+		#inputHouseholdSearchContainer{
+			position: fixed;
+			top: 500px;
+			width: 300px;
+			height: 100px;
+			margin-left:auto;
+   			margin-right: auto;
+   			bottom: 500px; /*Set bottom value to HeightOfBottomFrameDiv*/
+			overflow: auto;
+			background-color: red;
+		}
+
+		* html body{ /*IE6 hack*/
+			padding: 0px 0 0px 0; /*Set value to (HeightOfTopFrameDiv 0 HeightOfBottomFrameDiv 0)*/
+		}
+
+		* html #maincontent{ /*IE6 hack*/
+			height: 100%; 
+			width: 300px; 
+		}
+
+
+		input.textField {
+			margin: auto;
+			min-width: 240px;
+			width: 240px;
+		}
+
+		</style>
+		<title>ITS Trip Viewer</title>
+		<script type="text/javascript" src="/public/js/jquery.min.js"></script>
+		<script type="text/javascript">
+		var globalToken = 'ITSTRIPPROJECT2014';
+		$(document).ready(function () {
+			//$('#signupErrorText').hide();
+			$("input[name='inputHouseholdSelection']").change(function () {
+				if($("input[name='inputHouseholdSelection']:checked").val() === 'new'){
+					$('#inputSignupHouseholdId').prop('disabled', false);
+					$('#inputSignupHouseholdName').prop('disabled', false);
+	            	$('#inputSignupHouseholdAddress').prop('disabled', false);
+				}else if($("input[name='inputHouseholdSelection']:checked").val() === 'existing'){
+					$('#inputSignupHouseholdId').prop('disabled', true);
+	            	$('#inputSignupHouseholdName').prop('disabled', true);
+	            	$('#inputSignupHouseholdAddress').prop('disabled', true);
+					$('#inputSignupHouseholdId').val('Select...');
+	            	$('#inputSignupHouseholdName').val('Select...');
+	            	$('#inputSignupHouseholdAddress').val('Select...');
+				}
+			});
+
+			$('#buttonSignin').click(function () {
+				$('#signupErrorText').hide();
+				//no empty column
+				if($('#inputSignupUsername').val() == '' ||
+	               $('#inputSignupEmail').val() == '' ||
+	               $('#inputSignupLname').val() == '' ||
+	               $('#inputSignupFname').val() == '' ||
+	               $('#inputSignupHouseholdId').val() == '' ||
+	               $('#inputSignupHouseholdName').val() == '' ||
+	               $('#inputSignupHouseholdAddress').val() == '' ||
+	               $('#inputSignupPassword').val() == ''){
+					console.log('Column Cannot Be Empty');
+					$('#signupErrorText').html('! Column Cannot Be Empty');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				//check password consistent
+				if($('#inputSignupPassword').val() !== $('#inputSignupConfirmPassword').val()){
+					console.log('Password Inconsistent');
+					$('#signupErrorText').html('! Password Inconsistent');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				if($('#inputSignupPassword').val().toString().length < 8){
+					console.log('Password Too Short');
+					$('#signupErrorText').html('! Password Too Short (< 8)');
+					$('#signupErrorText').show();
+					return;
+				}
+
+				//sign up
+				console.log("Signing Up..");
+					var currentdate = new Date(); 
+					var datetime = 
+	                currentdate.getFullYear() + "-" 
+	                + (currentdate.getMonth()+1)  + "-" 
+	                + currentdate.getDate() + " " 
+	                + currentdate.getHours() + ":"  
+	                + currentdate.getMinutes() + ":" 
+	                + currentdate.getSeconds();
+
+					var verification = {
+	                    globalToken: globalToken
+	                }
+
+					var signupPayload = {
+	                    username: $('#inputSignupUsername').val(),
+	                    email: $('#inputSignupEmail').val(),
+	                    lname: $('#inputSignupLname').val(),
+	                    fname: $('#inputSignupFname').val(),
+	                    household_id: $('#inputSignupHouseholdId').val(),
+	                    household_name: $('#inputSignupHouseholdName').val(),
+	                    household_address: $('#inputSignupHouseholdAddress').val(),
+	                    timestamp: datetime,
+	                    password: $('#inputSignupPassword').val()
+	                };
+
+	            	$.ajax({
+	                    url: "/web_signup",
+	                    type: "POST",
+	                    contentType: "application/json",
+	                    processData: false,
+	                    data: JSON.stringify({message:'signin', verification:verification, data:signupPayload}),
+	                    complete: function (data) {
+	                        var responseJSON = $.parseJSON(data.responseText);
+	                        if(responseJSON.message == "signupSuccess"){
+	                        	console.log('Sign Up Success');
+	                        	//hide all column
+	                        	$('#inputSignupUsername').hide();
+	                    		$('#inputSignupEmail').hide();
+	                    		$('#inputSignupLname').hide();
+	                    		$('#inputSignupFname').hide();
+	                    		$('#inputSignupPassword').hide();
+	                    		$('#inputSignupConfirmPassword').hide();
+	                    		$('#inputSignupHouseholdId').hide();
+	                    		$('#inputSignupHouseholdName').hide();
+	                    		$('#inputSignupHouseholdAddress').hide();
+
+	                    		//hide all column text
+	                    		$('#inputSignupUsernameText').hide();
+	                    		$('#inputSignupEmailText').hide();
+	                    		$('#inputSignupLnameText').hide();
+	                    		$('#inputSignupFnameText').hide();
+	                    		$('#inputSignupPasswordText').hide();
+	                    		$('#inputSignupConfirmPasswordText').hide();
+	                    		$('#inputSignupHouseholdIdText').hide();
+	                    		$('#inputSignupHouseholdNameText').hide();
+	                    		$('#inputSignupHouseholdAddressText').hide();
+	                    		
+	                    		//hide signup button
+	                    		$('#buttonSignin').hide();
+
+								$('#signupTitle').html('Sign Up Suceed');
+	                        	$('#backMainPage').html('Log In');
+	                        }else{
+	                        	console.log(responseJSON.message);
+	                        	$('#signupErrorText').html(responseJSON.message);
+                            	$('#signupErrorText').show();
+	                        }
+	                    }
+	                });
+	            });
+		});
+		</script>
+	</head>
+	<body>
+		<div id="container">
+		<div id="topContainer">
+			<h1 id="title">ITS Trip Viewer</h1>
+			<h2 id="signupTitle">Sign Up</h2>
+			<p>
+			<h4 id="inputSignupUsernameText">Username</h4>
+            <input id="inputSignupUsername" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupEmailText">Email</h4>
+            <input id="inputSignupEmail" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupLnameText">Last Name</h4>
+            <input id="inputSignupLname" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupFnameText">First Name</h4>
+            <input id="inputSignupFname" type="text" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupPasswordText">Password</h4>
+            <input id="inputSignupPassword" type="password" />
+        	</p>
+        	<p>
+            <h4 id="inputSignupConfirmPasswordText">Confirm Password</h4>
+            <input id="inputSignupConfirmPassword" type="password" />
+       		</p>
+       		<h2 id="householdTitle">Household</h2>
+       		<p>
+       		<input type="radio" id="inputHouseholdSelection" name="inputHouseholdSelection" value="new" checked="true">new
+            <input type="radio" id="inputHouseholdSelection" name="inputHouseholdSelection" value="existing">existing
+       		<h4 id="inputHouseholdSearchText">Household Name Like (>2 words):</h4>
+       		<input id="inputHouseholdSearch" type="text" />
+       		<button id="buttonHouseholdSearch">Search</button>
+       		</p>
+       	</div>
+       	<div id="topContainer">
+       		<p>
+            <h4 id="inputSignupHouseholdIdText">Household Id</h4>
+            <input id="inputSignupHouseholdId" type="text" />
+       		</p>
+       		<p>
+            <h4 id="inputSignupHouseholdNameText">Household Name</h4>
+            <input id="inputSignupHouseholdName" type="text" />
+       		</p>
+       		<p>
+            <h4 id="inputSignupHouseholdAddressText">Household Address</h4>
+            <input id="inputSignupHouseholdAddress" type="text" />
+       		</p>
+       		<h4 id="signupErrorText" style="display:none;color:red;"></h4>
+			<button id="buttonSignin">Register</button>
+			</p>
+			<a href="/" id="backMainPage">Cancel</a>
+		</div>
+		<div id="inputHouseholdSearchContainer">
+       		<div id="inputHouseholdSelectionDiv">
+       			<h4 id="inputHouseholdSearchText">This is the table:</h4>
+       			<table id="inputHouseholdSelectionTable" class="table-striped" border="1"/>
+       		</div>
+       	</div>
+       </div>
+	</body>
+</html>

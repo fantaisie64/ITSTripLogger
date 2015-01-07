@@ -1,0 +1,214 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ucdavis.its.ITSTripLogger.ITSTabBarActivity" >
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_margin="10dp"
+    android:layout_centerHorizontal="true"
+    android:textColor="#0000ff"
+    android:textSize="20dp"
+    android:textStyle="bold"
+    android:text="Info and Settings" />
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:orientation="vertical" >
+    <TableLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:stretchColumns="1" >
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="User id:" />
+        <TextView
+        android:id="@+id/userIdTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="User Name:" />
+        <TextView
+        android:id="@+id/userNameTextView"    
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="Email:" />
+        <TextView
+        android:id="@+id/emailTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="Last Name:" />
+        <TextView
+        android:id="@+id/lnameTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="First Name:" />
+        <TextView
+        android:id="@+id/fnameTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="Household Id:" />
+        <TextView
+        android:id="@+id/householdIdTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="Household Name:" />
+        <TextView
+        android:id="@+id/householdNameTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    <TableRow>
+        <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_margin="4dp"
+	    android:gravity="right"
+	    android:textSize="14dp"
+	    android:textStyle="bold"
+	    android:text="Register Time:" />
+        <TextView
+        android:id="@+id/registerTimeTextView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:gravity="left"
+	    android:textSize="14dp"
+	    android:text="" />
+    </TableRow>
+    </TableLayout>
+    <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#00ffff" >
+    <RelativeLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="5dp" >
+	    <TextView
+	        android:id="@+id/locationServiceTextView"
+	    	android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+	    	android:layout_alignParentLeft="true"
+	    	android:layout_marginLeft="20dp"
+	    	android:textColor="#000000"
+		    android:textSize="17dp"
+		    android:text="Location:" />
+	    <Switch
+	        android:id="@+id/locationServiceSwitch"
+	        android:layout_width="wrap_content"
+	    	android:layout_height="20dp"
+	    	android:layout_alignParentRight="true"
+	    	android:layout_marginRight="10dp"
+	    	android:checked="true" />
+    </RelativeLayout>
+    <TextView
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="20dp"
+	    android:layout_marginRight="20dp"
+	    android:layout_marginBottom="5dp"
+	    android:gravity="center"
+	    android:textColor="#ff0000"
+	    android:textSize="12dp"
+	    android:maxLines="3"
+	    android:text="Notice: If you stop location service, you can no longer see your records on the map" />
+    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
